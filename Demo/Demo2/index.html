@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh sách Video</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f9;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+            margin: 20px 0;
+        }
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 10px;
+        }
+        .video-card {
+            width: 300px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            margin: 10px;
+            padding: 15px;
+            background-color: #fff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            position: relative;
+        }
+        .video-card:hover {
+            transform: translateY(-5px);
+        }
+        .video-poster {
+            width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+        .video-title {
+            font-size: 1.2em;
+            margin: 10px 0;
+            color: #333;
+        }
+        .video-views {
+            font-size: 0.9em;
+            color: #777;
+        }
+        .video-desc {
+            margin: 10px 0;
+            font-size: 1em;
+            color: #555;
+        }
+        .video-active {
+            font-weight: bold;
+            color: green;
+        }
+        .video-inactive {
+            font-weight: bold;
+            color: red;
+        }
+        .favorite-btn {
+            display: inline-block;
+            margin-top: 10px;
+            padding: 8px 12px;
+            font-size: 0.9em;
+            color: white;
+            background-color: #007bff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .favorite-btn.active {
+            background-color: #ff4081;
+        }
+        .status-select {
+            margin-top: 10px;
+            padding: 5px;
+            width: 100%;
+            font-size: 1em;
+        }
+    </style>
+    <!-- Nhúng jQuery từ CDN -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+
+    <h1>Danh sách Video</h1>
+    <div class="container" id="video-container">
+        <!-- Video Card 1 -->
+        <div class="video-card">
+            <iframe width="300" height="315" src="https://www.youtube.com/embed/KpjCfXo8a64" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="video-title">Title 1</div>
+            <div class="video-views">Lượt xem: 1000</div>
+            <div class="video-desc">Mô tả về video 1.</div>
+            <button class="favorite-btn">Yêu thích</button>
+            <select class="status-select">
+                <option value="true">Còn hoạt động</option>
+                <option value="false">Hết Hoạt động</option>
+            </select>
+        </div>
+
+        <!-- Video Card 2 -->
+        <div class="video-card">
+            <iframe width="300" height="315" src="https://www.youtube.com/embed/KpjCfXo8a64" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="video-title">Title 2</div>
+            <div class="video-views">Lượt xem: 2000</div>
+            <div class="video-desc">Mô tả về video 2.</div>
+            <button class="favorite-btn">Yêu thích</button>
+            <select class="status-select">
+                <option value="true">Còn hoạt động</option>
+                <option value="false">Hết Hoạt động</option>
+            </select>
+        </div>
+
+        <!-- Video Card 3 -->
+        <div class="video-card">
+            <iframe width="300" height="315" src="https://www.youtube.com/embed/KpjCfXo8a64" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <div class="video-title">Title 3</div>
+            <div class="video-views">Lượt xem: 1500</div>
+            <div class="video-desc">Mô tả về video 3.</div>
+            <button class="favorite-btn">Yêu thích</button>
+            <select class="status-select">
+                <option value="true">Còn hoạt động</option>
+                <option value="false">Hết Hoạt động</option>
+            </select>
+        </div>
+    </div>
+
+    <script>
+        // Sử dụng jQuery để thay đổi màu nền khi nhấn vào thẻ video
+        $(document).ready(function() {
+            $('.favorite-btn').click(function() {
+                $(this).toggleClass('active');
+                if ($(this).hasClass('active')) {
+                    $(this).text('Đã yêu thích');
+                } else {
+                    $(this).text('Yêu thích');
+                }
+            });
+
+            // Lấy giá trị khi người dùng thay đổi trạng thái trong select
+            $('.status-select').change(function() {
+                const selectedValue = $(this).val();
+                alert("Trạng thái đã chọn: " + selectedValue);
+            });
+        });
+    </script>
+</body>
+</html>
