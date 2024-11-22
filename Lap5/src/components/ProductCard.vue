@@ -27,9 +27,12 @@ const ngayhientai = computed(() => {
   const ngay = giaoHang.getDate().toString().padStart(2, '0'); // Định dạng ngày 2 chữ số
   const thang = (giaoHang.getMonth() + 1).toString().padStart(2, '0'); // Tháng bắt đầu từ 0
   const nam = giaoHang.getFullYear();
-  return `${ngay}/${thang}/${nam}`
+  const thuTrongTuan = ['Chủ Nhật', 'Thứ Hai', 'Thứ Ba', 'Thứ Tư', 'Thứ Năm', 'Thứ Sáu', 'Thứ Bảy'];
+  const thu = thuTrongTuan[giaoHang.getDay()]; // Ánh xạ chỉ số ngày thành tên thứ
+
+  return `${thu}, ${ngay}/${thang}/${nam}`;
 })
-  const danhGia = ref(0);
+  const danhGia = ref(3);
 </script>
 
 <template>
@@ -42,6 +45,7 @@ const ngayhientai = computed(() => {
         <div class="badge-container">
           <span v-if="sanPham.tags ['topDeal']"class="badge bg-danger">Top Deal</span>
           <span v-if="sanPham.tags ['chinhHang']" class="badge bg-primary">Chính Hãng</span>
+          <span v-if="sanPham.tags ['extra']" class="badge bg-red">Freeship Extra</span>
         </div>
 
         <div id="carouselExample" class="carousel slide" data-bs-ride="carousel">
@@ -67,27 +71,25 @@ const ngayhientai = computed(() => {
         </h5>
         <!-- Đánh giá -->
         <div class="mb-2">
-          <span v-for=" index in 5" 
-            :key = 'index'
-             class="star"
-            :class="{'selected' : index <= sanPham.danhGia }"
-            @click="danhGia = index"
-            >
-            ★
-          </span>
-          <p class="mt-2"> Sản Phẩm : {{ danhGia }} sao</p>
-        </div>
+  <span v-for="index in 5" 
+        :key="index" 
+        class="star"
+        :class="{'selected': index <= danhGia}" 
+        @click="danhGia = index">
+    ★
+  </span>
+</div>
         <!-- Giá -->
         <div>
           <span class="price">{{ sanPham.giaBan }}</span>
-          <div>
+          <div class="gia">
             <span class="original-price">{{ sanPham.giaGoc }}</span>
-            <span class="discount">{{ sanPham.giamGia }}%</span>
+            <span class="discount">-{{ sanPham.giamGia }}%</span>
           </div>
         </div>
         <hr>
         <!-- Ngày giao hàng -->
-        <div class="delivery mt-2"> Ngày dự kiến dao : {{ ngayhientai }}</div>
+        <div class="delivery mt-2"> Ngày dự kiến : {{ ngayhientai }}</div>
       </div>
     </div>
   </div>
@@ -122,19 +124,22 @@ const ngayhientai = computed(() => {
       margin-bottom: 5px;
     }
     .star {
-      font-size: 1.3rem;
-      cursor: pointer;
-      color: gray;
-      margin: 0 5px;
-      
-    }
+    font-size: 30px;
+    color: #ddd;  /* Màu sao rỗng */
+    cursor: pointer;
+}
+
+.star.selected {
+  color: gold;  /* Màu sao đầy */
+}
+
     .star:hover {
     color: gold;
     }
-    .star span{
+    /* .star span{
       font-size: 1.5rem;
       color: gold;
-    }
+    } */
     .price {
       color: red;
       font-weight: bold;
@@ -148,10 +153,18 @@ const ngayhientai = computed(() => {
     }
 
     .discount {
-      font-size: 0.9rem;
-      color: gray;
+      font-size: 1rem;
+      color: rgb(11, 3, 3);
+      border: 3px solid rgb(171, 37, 37);
+      padding: 2px 5px;
+      border-radius: 99px;
+      margin-left: 10px;
+     
     }
-
+    .gia{
+      padding: 10px;
+    }
+    
     .delivery {
       font-size: 0.85rem;
       color: gray;
