@@ -1,0 +1,19 @@
+{
+	"folders": [
+		{
+			"path": "../.."
+		},
+		{
+			"path": "../../../VueJS"
+		},
+		{
+			"path": "../../../Java4/ASM/vitejs-vite-q4t98c"
+		},
+		{
+			"path": "../../../ASM Fontend"
+		}
+	],
+	"settings": {
+		"liveServer.settings.multiRootWorkspaceName": "ASM_JS"
+	}
+}
